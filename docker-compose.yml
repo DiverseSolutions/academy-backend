@@ -1,0 +1,41 @@
+version: '0.1'
+
+services:
+  academy_service:
+    container_name: academy_service
+    image: academy_service
+    build: ./
+    ports: 
+      - "8055:8055"
+    volumes:
+      - ./:/code
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://root:password@db/academy
+    networks: 
+      - academy_network
+
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    volumes:
+      - db:/var/lib/mysql/data
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=academy
+    networks:
+      - academy_network
+
+networks:
+  academy_network:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local

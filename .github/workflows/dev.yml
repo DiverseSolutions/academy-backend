@@ -1,0 +1,28 @@
+# name: Academy CI
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: dev
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Move repository to /app
+#       run: |
+#         rm -rf /app/academy
+#         cp -r $GITHUB_WORKSPACE /app
+
+#     - name: Install Directus dependencies
+#       run: |
+#         npm install 
+
+#     - name: Start Directus with PM2
+#       run: |
+#         cd /app/academy
+#         pm2 start --name "directus" -- npx directus start
